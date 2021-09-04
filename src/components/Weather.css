@@ -1,0 +1,157 @@
+.container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 5%;
+}
+
+.spec-margin{
+    margin:3%;
+    width:100%;
+}
+
+.card {
+    padding: 1.2rem 3rem 1rem 3rem;
+    margin: 1rem;
+    border-radius: 1.5rem;
+    border-color: rgba(238, 237, 237, 0.438);
+    box-shadow: 5px 8px 10px #80808033
+}
+
+@media(max-width:767px) {
+    .card {
+        /* height: 10rem; */
+        width: 100%;
+        min-height: fit-content;
+        /* padding: 1.5rem 1.5rem 1rem 1.5rem */
+    }
+    .container {
+        width: 100%;
+        display: block;
+        align-items: center;
+        justify-content: center;
+        margin-top: 5%;
+    }
+    .spec-margin{
+        margin: 0%;
+        margin-top: 4%;
+        width:100%;
+    }
+}
+
+.carousel-indicators li {
+    width: 5px;
+    height: 6px;
+    border-radius: 100%;
+    opacity: 0.2;
+    background-color: #000000
+}
+
+.carousel-indicators {
+    margin-bottom: 0
+}
+
+.temp {
+    font-size: 5rem;
+    color: rgb(57, 57, 58)
+}
+
+.card-1 {
+    background: linear-gradient(to right, #ffffff 50%, rgba(241, 224, 190, 0.507))
+}
+
+@media(max-width:767px) {
+    .temp {
+        font-size: 3rem
+    }
+}
+
+.location {
+    margin-bottom: 1.5rem
+}
+
+@media(max-width:767px) {
+    .location {
+        font-size: 0.75rem
+    }
+}
+
+.img-fluid {
+    float: right;
+    width: 65%;
+    display: flex;
+    align-items: center
+}
+
+.row2 .img-fluid {
+    margin: 10% 0;
+    opacity: 0.5;
+    width: 40%
+}
+
+.card-2 .row {
+    justify-content: center
+}
+
+.card-3 .row {
+    justify-content: center
+}
+
+.row1 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: black
+}
+
+@media(max-width:500px) {
+    .row1 {
+        font-size: 0.9rem;
+        font-weight: bold;
+        color: black
+    }
+}
+
+.row3 {
+    font-size: 1rem;
+    font-weight: bold;
+    color: black
+}
+
+@media(max-width:500px) {
+    .row3 {
+        font-size: 0.7rem;
+        font-weight: bold;
+        color: black
+    }
+}
+
+.row4 {
+    font-size: 1rem;
+    color: rgb(87, 77, 77);
+    margin: 5% 0 2.5rem
+}
+
+@media(max-width:500px) {
+    .row4 {
+        font-size: 0.7rem;
+        font-weight: bold;
+        color: black
+    }
+}
+
+.card-3 .row3 {
+    margin: 5% 0 2.5rem
+}
+
+.col {
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.row {
+    overflow: visible
+}
