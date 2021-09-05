@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { getAyoba } from '../microapp'
 import { getMsisdn } from '../ayobastub';
 import Navbar from "../components/subcomponents/Navbar";
+import { useHistory } from "react-router-dom";
 import "./StartPage.css";
 import "./StartPage.scss";
 
 function StartPage() {
-
+    const history= useHistory();
     const [phone, setPhone] = useState('');
 
     const sayHello = () => {
@@ -15,7 +16,7 @@ function StartPage() {
         let ayoba = getAyoba();
         // setPhone(ayoba.getMsisdn());
         setPhone(getMsisdn());
-
+        history.push('./home')
     }
 
     return (

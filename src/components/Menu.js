@@ -37,7 +37,7 @@ function Menu() {
                         <div className='icon-text'>Temperature</div>
                     </div>
                     <div className="toggle">
-                        <input type="radio" name="sizeBy" value="Celsius" id="Celsius" checked />
+                        <input type="radio" name="sizeBy" value="Celsius" id="Celsius" defaultChecked />
                         <label htmlFor="Celsius">°C</label>
                         <input type="radio" name="sizeBy" value="Fahrenheit" id="Fahrenheit" />
                         <label htmlFor="Fahrenheit">°F</label>
@@ -50,9 +50,9 @@ function Menu() {
                         <div className='icon-text'>Time Format</div>
                     </div>
                     <div className="wrapper">
-                        <div class="switchToggle">
+                        <div className="switchToggle">
                             <input type="checkbox" id="switch1" />
-                            <label for="switch1">Toggle</label>
+                            <label htmlFor="switch1">Toggle</label>
                         </div>
                     </div>
                 </div>

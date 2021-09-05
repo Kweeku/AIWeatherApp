@@ -3,7 +3,11 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 5%;
+    margin-top: 10%;
+}
+
+.display-none{
+    display: none;
 }
 
 .spec-margin{
@@ -104,6 +108,10 @@
     color: black
 }
 
+.icon-row{
+    scale: .03rem;
+}
+
 @media(max-width:500px) {
     .row1 {
         font-size: 0.9rem;
@@ -156,5 +164,6 @@
 }
 
 .row {
-    overflow: visible
+    overflow: visible;
+    margin-left: -12%;
 }
