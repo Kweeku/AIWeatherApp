@@ -1,5 +1,6 @@
 import React from 'react';
 import { ClearSkyIcon, HurricaneIcon, OvercastCloudsIcon, SnowIcon, WindyIcon, FogIcon } from './subcomponents/WeatherIcons';
+import { FiRefreshCcw } from 'react-icons/fi';
 import DoughnutChart from './subcomponents/DoughnutChart';
 import LineChart from './subcomponents/LineChart';
 import MultiType from './subcomponents/MultiTypeChart';
@@ -9,6 +10,7 @@ export default function WeatherComponent() {
     return (
         <div className='max-width'>
             <div className="container">
+                <FiRefreshCcw style={{ height: 35, width: 35, marginBottom: 10 }} />
                 <div className="spec-margin">
                     <div className="row justify-content-center">
                         <div className='card card-1'>
