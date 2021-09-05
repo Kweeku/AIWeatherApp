@@ -10,12 +10,12 @@ export default function ChangeLocation() {
             <Navbar />
 
             <div className='container-location'>
-                <div class="form-group">
+                <div className="form-group">
                     <span>Longitude</span>
                     <input className="form-field" type="text" placeholder="longitude" />
                 </div>
 
-                <div class="form-group">
+                <div className="form-group">
                     <input className="form-field" type="text" placeholder="latitude" />
                     <span>Latitude</span>
                 </div>

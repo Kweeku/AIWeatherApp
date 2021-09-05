@@ -93,13 +93,7 @@ handle24hrChange= (t,time) =>{
                         <div className='icon-text'>Temperature</div>
                     </div>
                     <div className="toggle">
-                        <input 
-                        type="radio" 
-                        name="sizeBy" 
-                        id="Celsius" 
-                        checked 
-                        value={celsius}
-                        onChange={this.handleCelsius}/>
+                        <input type="radio" name="sizeBy" value="Celsius" id="Celsius" defaultChecked />
                         <label htmlFor="Celsius">°C</label>
                         <input 
                         type="radio" 
@@ -117,9 +111,9 @@ handle24hrChange= (t,time) =>{
                         <div className='icon-text'>Time Format</div>
                     </div>
                     <div className="wrapper">
-                        <div class="switchToggle">
-                            <input type="checkbox" id="switch1" value={twelve} onChange={'24' ? this.handle24hrChange : this.handle12hrChange}/>
-                            <label for="switch1">Toggle</label>
+                        <div className="switchToggle">
+                            <input type="checkbox" id="switch1" />
+                            <label htmlFor="switch1">Toggle</label>
                         </div>
                     </div>
                 </div>
