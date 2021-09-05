@@ -5,7 +5,9 @@ import DoughnutChart from './subcomponents/DoughnutChart';
 import LineChart from './subcomponents/LineChart';
 import MultiType from './subcomponents/MultiTypeChart';
 import moment from 'moment';
+import { getCountry } from "../microapp";
 import './Weather.css';
+import { initial } from 'lodash';
 
 let mounted = false;
 
@@ -53,6 +55,17 @@ export default function WeatherComponent() {
                 break;
         }
     }
+    
+    const constantCountry = () =>{
+        if (getCountry === null){
+            return(
+                null
+            )
+        }
+        else {
+            return getCountry;
+        }
+    }
 
     return (
         <div className='max-width'>
@@ -67,7 +80,7 @@ export default function WeatherComponent() {
                                 <div className="text-black row">
                                     <div className="col">
                                         <div className="div1">
-                                            <h5>Vancouver</h5>
+                                            <h5>{constantCountry}</h5>
                                             <h1 className="temp">{Math.round(instantSummary.Temperature_C * 10) / 10}<sup>°C </sup> </h1>
                                             <p className="my-0">Feels like {Math.round(instantSummary.ApparentTemperature_C * 10) / 10}<sup>°C </sup></p>
                                         </div>
@@ -139,10 +152,10 @@ export default function WeatherComponent() {
                     <DoughnutChart humidity={instantSummary.Humidity} title={"Humidity"}/>
                 </div>
                 <div className='spec-margin card'>
-                    <LineChart />
+                    <LineChart humidity={instantSummary.Humidity} title={"Humidity"}/>
                 </div>
-            </div>
-            <div className='container'>
+            </div>  
+            {/* <div className='container'>
                 <div className='spec-margin card'>
                     <LineChart />
                 </div>
@@ -154,7 +167,7 @@ export default function WeatherComponent() {
                 <div className='spec-margin card'>
                     <MultiType />
                 </div>
-            </div>
+            </div> */}
         </div>
     )
 }
