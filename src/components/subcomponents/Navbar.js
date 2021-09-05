@@ -16,7 +16,7 @@ export default function Navbar() {
                         <span className='ham-span'></span>
                     </label>
                 </div>
-                <h3 className="logo">Coding<span>Beast</span></h3>
+                <h3 className="logo">AI<span>WEATHER</span></h3>
             </div>
         </div>
     )

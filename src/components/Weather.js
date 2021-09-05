@@ -10,7 +10,7 @@ export default function WeatherComponent() {
     return (
         <div className='max-width'>
             <div className="container">
-                <FiRefreshCcw style={{ height: 35, width: 35, marginBottom: 10 }} />
+                <FiRefreshCcw style={{ height: 35, width: 35, marginBottom: 10 }} onClick/>
                 <div className="spec-margin">
                     <div className="row justify-content-center">
                         <div className='card card-1'>
