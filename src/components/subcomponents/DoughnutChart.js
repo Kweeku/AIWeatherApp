@@ -4,11 +4,11 @@ import { Doughnut } from 'react-chartjs-2';
 const DoughnutChart = (props) => {
 
     const data = {
-        labels: ['Green'],
+        labels: [props.title],
         datasets: [
             {
-                label: '# of Votes',
-                data: [58, 42],
+                label: `${props.humidity * 100}%`,
+                data: [props.humidity * 100, 42],
                 backgroundColor: [
                     'rgba(75, 192, 192, 0.5)',
                     'rgba(255, 255, 255, 1)',
@@ -24,7 +24,7 @@ const DoughnutChart = (props) => {
     return (
         <>
             <div className='header'>
-                <h1 className='title'>Doughnut Chart</h1>
+                <h1 className='title'>{props.title}</h1>
             </div>
             <Doughnut data={data} />
         </>
