@@ -110,6 +110,9 @@
         font-weight: bold;
         color: black
     }
+    .multitype{
+        display: none;
+    }
 }
 
 .row3 {

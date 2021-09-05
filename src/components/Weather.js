@@ -118,7 +118,7 @@ export default function WeatherComponent() {
                     <LineChart />
                 </div>
             </div>
-            <div className='container'>
+            <div className='container multitype'>
                 <div className='spec-margin card'>
                     <MultiType />
                 </div>
