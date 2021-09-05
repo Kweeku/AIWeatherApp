@@ -1,0 +1,96 @@
+// https://picular.co/bluemoon
+
+// @import url("https://fonts.googleapis.com/css?family=Raleway:400,400i,700");
+
+.ul-comp {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  list-style-type: none;
+  margin-left: -15%;
+
+  .li-comp {
+    padding: 6px 0;
+
+    .a-comp {
+      --fill-color: #49e619;
+      --stroke-color:#eaeaf3;
+      position: relative;
+      display: block;
+      padding: 2px 0;
+      font: 800 1.5rem Raleway, sans-serif;
+      text-decoration: none;
+      text-transform: uppercase;
+      -webkit-text-stroke: 0.5px var(--stroke-color);
+      background: linear-gradient(var(--fill-color) 0 100%) left / 0 no-repeat;
+      color: transparent;
+      background-clip: text;
+      transition: 0.5s linear;
+
+      &:hover {
+        background-size: 100%;
+      }
+    }
+  }
+}
+
+$darkNavy: #213140;
+$teal1: #66B3FB;
+$teal2: #4B9DEA;
+$charcoal: #555555;
+$gold: #B6985A;
+
+$activeShadow: 0 0 10px rgba($teal1, .5);
+
+/* MIXINS */
+@mixin hideInput {width: 0; height: 0; position: absolute; left: -9999px;}
+@mixin breakpoint($point) {
+	@if $point == 1100 {
+		@media (max-width: 1100px) { @content ; }
+	}
+	@else if $point == 800 {
+		@media (max-width: 800px) { @content ; }
+	}
+}
+
+.toggle {
+	margin: 0; box-sizing: border-box;
+	font-size: 0;
+	display: flex; flex-flow: row nowrap;
+	justify-content: flex-start; align-items: stretch;
+	input {@include hideInput;}
+	input + label {
+		margin: 0; padding: .75rem 1rem; box-sizing: border-box;
+		position: relative; display: inline-block;
+		border: solid 1px #DDD; background-color: #FFF;
+		font-size: 1rem; line-height: 40%; font-weight: 700; text-align: center;
+		box-shadow: 0 0 0 rgba(255,255,255,0);
+		transition: 	border-color .15s ease-out, 
+					color .25s ease-out, 
+					background-color .15s ease-out,
+					box-shadow .15s ease-out;
+		
+		/* ADD THESE PROPERTIES TO SWITCH FROM AUTO WIDTH TO FULL WIDTH */
+		/*flex: 0 0 50%; display: flex; justify-content: center; align-items: center;*/
+		/* ----- */
+		
+		&:first-of-type {border-radius: 6px 0 0 6px; border-right: none;}
+		&:last-of-type {border-radius: 0 6px 6px 0; border-left: none;}
+	}
+	input:hover + label {border-color: $darkNavy;}
+	input:checked + label {
+		background-color: $teal2;
+		color: #FFF;
+		box-shadow: $activeShadow;
+		border-color: $teal2;
+		z-index: 1;
+	}
+
+	@include breakpoint(800) {
+		input + label {
+			padding: .75rem .7rem;
+			flex: 0 0 50%;
+			display: flex; justify-content: center; align-items: center;
+		}
+	}
+}
