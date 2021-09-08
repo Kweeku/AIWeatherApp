@@ -3,11 +3,9 @@ import { ClearSkyIcon, HurricaneIcon, OvercastCloudsIcon, SnowIcon, WindyIcon, F
 import { FiRefreshCcw } from 'react-icons/fi';
 import DoughnutChart from './subcomponents/DoughnutChart';
 import LineChart from './subcomponents/LineChart';
-import MultiType from './subcomponents/MultiTypeChart';
 import moment from 'moment';
 import { getCountry } from "../microapp";
 import './Weather.css';
-import { initial } from 'lodash';
 
 let mounted = false;
 
@@ -15,7 +13,17 @@ export default function WeatherComponent() {
     const weatherData = require('../fixture/AIweather.json');
     const [recentData, setRecentData] = useState([]);
     const [briefData, setBriefData] = useState([]);
-    const [instantSummary, setInstantSummary] = useState([]);
+    const [state, setState] = useState({
+        instantSummary: [],
+        pressureLabels: [],
+        pressureVals: [],
+        tempLabels: [],
+        tempVals: [],
+        windLabels: [],
+        windVals: [],
+        humidityLabels: [],
+        humidityVals: [],
+    });
 
     if (!mounted) {
         setRecentData(weatherData.slice(-10));
@@ -25,11 +33,23 @@ export default function WeatherComponent() {
     useEffect(() => {
 
         if (recentData !== []) {
-            console.log(recentData);
-            setInstantSummary(recentData.slice(-1).shift());
+            setState({ ...state, instantSummary: recentData.slice(-1).shift() });
             setBriefData(recentData.slice(-4))
+
+            recentData.map(item => {
+                let labelDate = moment(item.FormattedDate).format('HH MM');
+                state.pressureLabels.push(labelDate);
+                state.tempLabels.push(labelDate);
+                state.windLabels.push(labelDate);
+                state.humidityLabels.push(labelDate);
+
+                state.pressureVals.push(item.Pressure_millibars)
+                state.tempVals.push(item.Temperature_C)
+                state.windVals.push(item.WindSpeed_kmperh)
+                state.humidityVals.push(item.Humidity)
+            })
         }
-    }, [weatherData])
+    }, [recentData])
 
     const renderWeatherIcon = (condition) => {
         switch (condition) {
@@ -41,6 +61,15 @@ export default function WeatherComponent() {
 
             case 'Clear':
                 return <ClearSkyIcon />
+
+            case 'Snow':
+                return <SnowIcon />
+
+            case 'Rain':
+                return <HurricaneIcon />
+
+            case 'Windy':
+                return <WindyIcon />
 
             case 'Partly Cloudy':
                 return <PartlyCloudyIcon />
@@ -55,10 +84,10 @@ export default function WeatherComponent() {
                 break;
         }
     }
-    
-    const constantCountry = () =>{
-        if (getCountry === null){
-            return(
+
+    const constantCountry = () => {
+        if (getCountry === null) {
+            return (
                 null
             )
         }
@@ -74,20 +103,19 @@ export default function WeatherComponent() {
                     <FiRefreshCcw style={{ height: 35, width: 35, marginBottom: 10 }} />
                 </div>
                 <div className="spec-margin">
-                    <div className="row justify-content-center">
+                    <div className="row">
                         <div className='card card-1'>
-                            {instantSummary &&
+                            {state.instantSummary &&
                                 <div className="text-black row">
                                     <div className="col">
-                                        <div className="div1">
-                                            <h5>{constantCountry}</h5>
-                                            <h1 className="temp">{Math.round(instantSummary.Temperature_C * 10) / 10}<sup>°C </sup> </h1>
-                                            <p className="my-0">Feels like {Math.round(instantSummary.ApparentTemperature_C * 10) / 10}<sup>°C </sup></p>
-                                        </div>
+                                        <h5>{constantCountry}</h5>
+                                        <h1 className="temp">{Math.round(state.instantSummary.Temperature_C * 10) / 10}<sup>°C </sup> </h1>
+                                        <p className="my-0">Feels like {Math.round(state.instantSummary.ApparentTemperature_C * 10) / 10}<sup>°C </sup></p>
+                                        <p className="my-0">Wind Speed {Math.round(state.instantSummary.WindSpeed_kmperh * 10) / 10} km/h</p>
                                     </div>
                                     <div className='col-6 d-flex row'>
-                                        {renderWeatherIcon(instantSummary.Summary)}
-                                        <p className="my-0 mt-2">{instantSummary.DailySummary}</p>
+                                        {renderWeatherIcon(state.instantSummary.Summary)}
+                                        <p className="my-0 mt-2">{state.instantSummary.DailySummary}</p>
                                     </div>
                                 </div>
                             }
@@ -98,10 +126,10 @@ export default function WeatherComponent() {
                     <div className="row justify-content-center">
                         <div className='card card-2'>
                             <div className="row">
-                                {briefData.map(weather => {
+                                {briefData.map((weather, key) => {
                                     return (
-                                        <div className="col">
-                                            <div className="row row1">{Math.round(weather.Temperature_C*10)/10}&deg;</div>
+                                        <div className="col" key={key}>
+                                            <div className="row row1">{Math.round(weather.Temperature_C * 10) / 10}&deg;</div>
                                             <div className='row icon-row'>{renderWeatherIcon(weather.Summary)}</div>
                                             <div className="row row3">{moment(weather.FormattedDate).format('LT')}</div>
                                         </div>
@@ -149,25 +177,25 @@ export default function WeatherComponent() {
             </div> */}
             <div className='container'>
                 <div className='spec-margin card'>
-                    <DoughnutChart humidity={instantSummary.Humidity} title={"Humidity"}/>
+                    <DoughnutChart humidity={state.instantSummary.Humidity} title={"Humidity"} />
                 </div>
                 <div className='spec-margin card'>
-                    <LineChart humidity={instantSummary.Humidity} title={"Humidity"}/>
-                </div>
-            </div>  
-            {/* <div className='container'>
-                <div className='spec-margin card'>
-                    <LineChart />
-                </div>
-                <div className='spec-margin card'>
-                    <LineChart />
+                    <LineChart chartValues={state.pressureVals} chartLabels={state.pressureLabels} title={"Pressure"} dataLabel={"Pressure (millibars)"} />
                 </div>
             </div>
-            <div className='container multitype'>
+            <div className='container'>
                 <div className='spec-margin card'>
-                    <MultiType />
+                    <LineChart chartValues={state.tempVals} chartLabels={state.tempLabels} title={"Temperature"} dataLabel={"Temperature (°C)"} />
                 </div>
-            </div> */}
+                <div className='spec-margin card'>
+                    <LineChart chartValues={state.windVals} chartLabels={state.windLabels} title={"Wind Speed"} dataLabel={"Wind Speed (km/h)"} />
+                </div>
+            </div>
+            <div className='container '>
+                <div className='spec-margin card'>
+                    <LineChart chartValues={state.humidityVals} chartLabels={state.humidityLabels} title={"Humidity"} dataLabel={"Humidity (%)"} />
+                </div>
+            </div>
         </div>
     )
 }
