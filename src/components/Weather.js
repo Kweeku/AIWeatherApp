@@ -6,6 +6,7 @@ import LineChart from './subcomponents/LineChart';
 import moment from 'moment';
 import { getCountry } from "../microapp";
 import './Weather.css';
+import GetCountry from "../GetCountry";
 
 let mounted = false;
 
@@ -85,16 +86,6 @@ export default function WeatherComponent() {
         }
     }
 
-    const constantCountry = () => {
-        if (getCountry === null) {
-            return (
-                null
-            )
-        }
-        else {
-            return getCountry;
-        }
-    }
 
     return (
         <div className='max-width'>
@@ -108,7 +99,7 @@ export default function WeatherComponent() {
                             {state.instantSummary &&
                                 <div className="text-black row">
                                     <div className="col">
-                                        <h5>{constantCountry}</h5>
+                                        <GetCountry/>
                                         <h1 className="temp">{Math.round(state.instantSummary.Temperature_C * 10) / 10}<sup>°C </sup> </h1>
                                         <p className="my-0">Feels like {Math.round(state.instantSummary.ApparentTemperature_C * 10) / 10}<sup>°C </sup></p>
                                         <p className="my-0">Wind Speed {Math.round(state.instantSummary.WindSpeed_kmperh * 10) / 10} km/h</p>
