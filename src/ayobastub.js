@@ -176,6 +176,7 @@ import { onLocationChanged } from "./microapp";
 import { onLocationSentResponse } from "./microapp";
 import { onNicknameChanged } from "./microapp";
   export const AyobaStub = {
+    
     getMsisdn: function(){
       return "0837828008";
   },
