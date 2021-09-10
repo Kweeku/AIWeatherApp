@@ -7,19 +7,41 @@ import {useNavigate} from 'react-router-dom';
 import {Link} from 'react-router-dom';
 import Moment from 'react-moment';
 import moment from 'moment';
-import { getContactName } from "../microapp";
-import {getMsisdn} from "../ayobastub";
+import { AyobaStub } from "../ayobastub";
+import {getAyoba} from "../microapp";
 import './Menu.scss';
 import './Menu.css';
 
 
 // const history = useHistory();
+var Ayoba = getAyoba();
 class Menu extends React.Component{
     constructor(props){
         super(props)
+
         this.state={scale:'c', temp:0}
         this.state={value:'12', time:''}
+        this.state = {
+            "username":"username"
+          };
+          this.getusername = this.getusername.bind(this);
     }
+
+componentDidMount() {
+    if(Ayoba === null || Ayoba ===undefined){
+        Ayoba = AyobaStub
+    }
+}
+
+getusername() {
+    // let ayoba =  this.Ayoba();
+    let namechange = Ayoba.onNicknameChanged()
+    this.setState({
+        "namechange": namechange
+      });
+
+}
+
 handleCelsius = (e) =>{
     this.setState({scale:'c',temp:e.target.value})
 }
@@ -53,17 +75,12 @@ handle24hrChange= (t,time) =>{
         const celsius = scale === 'f' ? (temp-32*5/9) : temp;
         const fahrenheit = scale === 'c' ? (temp*9/5+32) : temp;
 
-        const constantName = () =>{
-            if (getContactName === null){
-                return(
-                    getMsisdn()
-                )
-            }
-        }
         return(
 <           div className="Menu">
             <h1>SETTINGS</h1>
-            <h2>{constantName}</h2>
+            <button onclick={this.getusername}>
+                {this.state.getusername}
+            </button>
             <h5 className='mt-3'>
                 Welcome Back!
             </h5>

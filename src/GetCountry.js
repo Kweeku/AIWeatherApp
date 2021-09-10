@@ -1,48 +1,28 @@
 import React, { Component } from "react";
+import {FaSearchLocation} from 'react-icons/fa';
+import { AyobaStub } from "./ayobastub";
+import { getAyoba } from "./microapp";
 
-
-const MockAyoba = {
-    getCountry: function(){
-        return "MOCK";
-    }
-};
-
-
-
+var Ayoba = getAyoba();
 class GetCountry extends Component {
     constructor() {
       super();
       this.state = {
         "country":""
       };
-      this.getAyoba = this.getAyoba.bind(this);
-      this.getCountry = this.getCountry.bind(this);
+    //   this.getAyoba = this.getAyoba.bind(this);
+        this.getCountry = this.getCountry.bind(this);
     }
 
-  getAyoba() {
-    var userAgent = navigator.userAgent || navigator.vendor || window.opera;
-
-    // Windows Phone must come first because its UA also contains "Android"
-    if (/windows phone/i.test(userAgent)) {
-        return null;
+    componentDidMount() {
+        if(Ayoba === null || Ayoba ===undefined){
+            Ayoba = AyobaStub
+        }
     }
 
-    if (/android/i.test(userAgent)) {
-        
-        return window["Android"];
-    }
-
-    // iOS detection from: http://stackoverflow.com/a/9039885/177710
-    if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-        return null; // todo 
-    }
-
-    return MockAyoba;
-}
-
-getCountry() {
-    let ayoba =  this.getAyoba();
-    let country = ayoba.getCountry();
+    getCountry() {
+    // let ayoba =  this.Ayoba();
+    let country = Ayoba.getCountry()
     this.setState({
         "country": country
       });
@@ -52,17 +32,9 @@ getCountry() {
 
 render() {
     return (
-    <div>
-    {/* <hr/> 
-         <label> Get Country: </label>
-        <div>
-            <input type="button" value="Get Country" onClick={this.getCountry} />  
-            <input type="text" id="getCountry" value={this.state.country}/> 
-        </div>
-        <p>
-            <p>1. getCountry()</p>
-        </p> */}
-        {this.getCountry}
+    <div className="Location">
+        <FaSearchLocation onClick={this.getCountry}/>
+        {this.state.country}
     </div>
     );
   }

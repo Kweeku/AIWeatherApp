@@ -3,6 +3,7 @@ import { getAyoba } from '../microapp'
 import { getMsisdn } from '../ayobastub';
 import Navbar from "../components/subcomponents/Navbar";
 import { useHistory } from "react-router-dom";
+import { AyobaStub } from "../ayobastub";
 import "./StartPage.css";
 import "./StartPage.scss";
 
@@ -15,7 +16,7 @@ function StartPage() {
 
         let ayoba = getAyoba();
         // setPhone(ayoba.getMsisdn());
-        setPhone(getMsisdn());
+        setPhone(AyobaStub.getMsisdn());
         history.push('./home')
     }
 

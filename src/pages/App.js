@@ -3,6 +3,7 @@ import { getAyoba } from '../microapp'
 import { getMsisdn } from '../ayobastub';
 import WeatherComponent from "../components/Weather";
 import Navbar from "../components/subcomponents/Navbar";
+import { AyobaStub } from "../ayobastub"; 
 import "./App.css";
 
 function App() {
@@ -12,9 +13,9 @@ function App() {
   const sayHello = () => {
 
 
-    let ayoba = getAyoba();
-    // setPhone(ayoba.getMsisdn());
-    setPhone(getMsisdn());
+    // let ayoba = getAyoba();
+    // // setPhone(ayoba.getMsisdn());
+    // setPhone(AyobaStub.getMsisdn());
 
   }
 
